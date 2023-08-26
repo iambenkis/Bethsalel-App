@@ -5,7 +5,7 @@ export default function Navbar() {
   const [isActive, setActive] = useState(false)
 
   return (
-    <div className="flex w-full justify-between items-center px-20 py-7 pl-40">
+    <div className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-20 py-5 pl-40">
       <a href="/" className="font-bold text-4xl uppercase">
         betsalel <span className="font-light ">ships</span>
       </a>
@@ -25,7 +25,7 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li className="mx-6">
-          <a href="#">Services</a>
+          <a href="#service">Services</a>
         </li>
         <li className="ml-3 mr-6">
           <a href="#">Contact</a>

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 export default function Header() {
   return (
-    <div className={`home bg-cover bg-no-repeat w-full`}>
+    <div className={`home bg-cover bg-no-repeat w-full mt-20`}>
       <div className="z-10 w-full h-full bg-black/75">
         <div className="text-white flex flex-col justify-end  h-full px-20 pb-20 ml-20">
           <h1 className="uppercase font-medium text-5xl">ready, now.</h1>

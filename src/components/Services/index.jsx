@@ -1,6 +1,6 @@
 export function Service() {
   return (
-    <div className="px-80 py-10">
+    <div className="px-80 py-10" id="service">
       <div className="flex flex-col justify-center items-center mb-10">
         <h1 className="border font-medium px-4 py-2 border-black rounded-xl mb-5">
           What we offer
