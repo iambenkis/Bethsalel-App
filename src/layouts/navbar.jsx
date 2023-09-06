@@ -16,7 +16,7 @@ export default function Navbar() {
           } px-4 border rounded-md`}
         >
           <NavLink
-            to="/messages"
+            to="/booking"
             style={({ isActive, isPending }) => {
               setActive(isActive)
             }}
@@ -30,7 +30,9 @@ export default function Navbar() {
         <li className="ml-3 mr-6">
           <a href="#">Contact</a>
         </li>
-        <li>About</li>
+        <li>
+          <a href="#about">About</a>
+        </li>
       </ul>
     </div>
   )
