@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { CiUser } from 'react-icons/ci'
 
 export default function Navbar() {
   const [isActive, setActive] = useState(false)
 
   return (
-    <div className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-20 py-5 pl-40">
+    <div
+      className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-40 py-5 pl-40"
+      style={{
+        zIndex: '100',
+      }}
+    >
       <a href="/" className="font-bold text-4xl uppercase">
         betsalel <span className="font-light ">ships</span>
       </a>
@@ -25,15 +31,24 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li className="mx-6">
-          <a href="#service">Services</a>
+          <NavLink to="/" href="#service">
+            Services
+          </NavLink>
         </li>
         <li className="ml-3 mr-6">
-          <a href="#">Contact</a>
+          <NavLink to="/" href="#contact">
+            Contact
+          </NavLink>
         </li>
         <li>
-          <a href="#about">About</a>
+          <NavLink to="/" href="#about">
+            About
+          </NavLink>
         </li>
       </ul>
+      <div>
+        <CiUser className="text-xl cursor-pointer" />
+      </div>
     </div>
   )
 }
