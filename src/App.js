@@ -5,6 +5,8 @@ import { Service } from './components/Services'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Footer } from './layouts/footer'
 import Booking from './components/Booking'
+import Signup from './components/signup'
+import Login from './components/login'
 
 function App() {
   return (
@@ -12,18 +14,31 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/booking" element={<Booking />} />
+          <Route
+            path="/booking"
+            element={
+              <>
+                <Booking />
+                <Footer />
+              </>
+            }
+          />
           <Route
             path="/"
             element={
               <>
                 <Header />
                 <Service />
+                <Footer />
               </>
             }
           />
         </Routes>
-        <Footer />
+
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </Router>
     </div>
   )
