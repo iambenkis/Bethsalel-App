@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@clerk/clerk-react": "^4.24.2",
+    "@material-tailwind/react": "^2.1.2",
     "@progress/kendo-react-dateinputs": "^5.17.0",
     "@syncfusion/ej2-react-calendars": "^22.2.12",
     "@testing-library/jest-dom": "^5.17.0",
