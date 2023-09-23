@@ -1,5 +1,5 @@
 import './App.css'
-import Navbar from './layouts/navbar'
+import NavbarDefault from './layouts/navbar'
 import Header from './components/header'
 import { Service } from './components/Services'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="w-full">
       <Router>
-        <Navbar />
+        <NavbarDefault />
         <Routes>
           <Route
             path="/booking"
