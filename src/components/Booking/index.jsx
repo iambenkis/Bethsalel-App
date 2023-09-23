@@ -1,29 +1,18 @@
+import { Radio } from "@material-tailwind/react";
+
 const Booking = () => {
   return (
-    <div className={`home bg-cover bg-no-repeat w-full mt-20 backdrop-blur-sm`}>
-      <div className=" w-full h-full bg-black/75">
-        <div className="text-white flex justify-between items-center px-20 ml-20 mr-20">
-          <form action="" className="bg-neutral-300 w-[45%]  mt-10">
+    <div className={`home bg-cover bg-no-repeat w-full `}>
+      <div className=" w-full h-full bg-black/75 pt-20">
+        <div className="text-white flex flex-col-reverse md:flex-row justify-between items-center px-4 md:px-20">
+          <form action="" className="bg-neutral-300 shadow-xl w-[80%] md:w-[45%] mx-auto bg-white mt-10 p-6">
             <h1 className="p-5 bg-white text-black text-xl">
               <span className="font-bold ">Book</span> your ticket
             </h1>
             <div className="p-5">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="html"
-                  name="fav_language"
-                  value="HTML"
-                />
-                 {' '}
-                <label for="html" className="text-black text-xs">
-                  Roundtrip
-                </label>
-                 <input type="radio" id="css" name="fav_language" value="CSS" />
-                 {' '}
-                <label for="css" className="text-black text-xs">
-                  One way
-                </label>
+              <div className="flex items-center text-xs">
+                <Radio name="type" label="Roundtrip" defaultChecked/>
+                <Radio name="type" label="One way"  />
               </div>
               <input
                 type="text"
@@ -77,8 +66,8 @@ const Booking = () => {
             </div>
           </form>
           <div>
-            <h1 className="font-medium text-6xl">Book your ticket </h1>
-            <p className="italic text-6xl mt-2 font-thin">Easy online</p>
+            <h1 className="font-medium text-3xl md:text-6xl">Book your ticket </h1>
+            <p className="italic text-3xl md:text-6xl mt-2 font-thin">Easy online</p>
           </div>
         </div>
       </div>
