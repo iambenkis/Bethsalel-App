@@ -46,6 +46,9 @@ export default function NavbarDefault() {
           Services
         </a>
       </Typography>
+      <Button variant="gradient" size="sm" fullWidth className="mb-2">
+          <Link to="/booking">Book Now</Link>
+        </Button>
       <Typography
         as="li"
         variant="small"
@@ -70,13 +73,6 @@ export default function NavbarDefault() {
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <Link to="/booking">Book Now</Link>
-          </Button>
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -118,9 +114,6 @@ export default function NavbarDefault() {
       </div>
       <MobileNav open={openNav}>
         {navList}
-        <Button variant="gradient" size="sm" fullWidth className="mb-2">
-          <Link to="/booking">Book Now</Link>
-        </Button>
       </MobileNav>
     </Navbar>
 
