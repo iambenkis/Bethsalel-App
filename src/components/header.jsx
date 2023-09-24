@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+
 export default function Header() {
   return (
     <div className={`home bg-cover bg-no-repeat w-full mt-20`}>
@@ -14,6 +16,7 @@ export default function Header() {
           </NavLink>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }
