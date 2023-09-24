@@ -7,6 +7,7 @@ import { Footer } from './layouts/footer'
 import Booking from './components/Booking'
 import Signup from './components/signup'
 import Login from './components/login'
+import Protected from './protected'
 
 function App() {
   return (
@@ -17,20 +18,26 @@ function App() {
           <Route
             path="/booking"
             element={
-              <>
-                <Booking />
-                <Footer />
-              </>
+              <Protected>
+                <>
+                  {' '}
+                  <Booking />
+                  <Footer />
+                </>
+              </Protected>
             }
           />
           <Route
             path="/"
             element={
-              <>
-                <Header />
-                <Service />
-                <Footer />
-              </>
+              <Protected>
+                <>
+                  {' '}
+                  <Header />
+                  <Service />
+                  <Footer />
+                </>
+              </Protected>
             }
           />
         </Routes>
