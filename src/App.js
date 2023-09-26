@@ -8,6 +8,7 @@ import Booking from './components/Booking'
 import Signup from './components/signup'
 import Login from './components/login'
 import Protected from './protected'
+import Books from './components/Books'
 
 function App() {
   return (
@@ -35,6 +36,21 @@ function App() {
                   {' '}
                   <Header />
                   <Service />
+                  <Footer />
+                </>
+              </Protected>
+            }
+          />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <>
+                  {' '}
+                  <Books />
                   <Footer />
                 </>
               </Protected>

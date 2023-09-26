@@ -8,6 +8,7 @@ import { FaCaretDown } from 'react-icons/fa'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Logout } from '../redux/login'
+// import Protected from '../protected'
 
 const axiosConfig = {
   method: 'GET', // Specify the HTTP method (GET, POST, etc.)
@@ -63,37 +64,40 @@ export default function Navbar() {
       <a href="/" className="font-bold text-4xl uppercase">
         betsalel <span className="font-light ">ships</span>
       </a>
-      <ul className="flex ml-[5%] mr-[10%]">
-        <li
-          className={`${
-            isActive ? 'bg-blue-400 text-white' : ''
-          } px-4 border rounded-md`}
-        >
-          <NavLink
-            to="/booking"
-            style={({ isActive, isPending }) => {
-              setActive(isActive)
-            }}
+      {localStorage.getItem('bet_token') && (
+        <ul className="flex ml-[5%] mr-[10%]">
+          <li
+            className={`${
+              isActive ? 'bg-blue-400 text-white' : ''
+            } px-4 border rounded-md`}
           >
-            Booking
-          </NavLink>
-        </li>
-        <li className="mx-6">
-          <NavLink to="/" href="#service">
-            Services
-          </NavLink>
-        </li>
-        <li className="ml-3 mr-6">
-          <NavLink to="/" href="#contact">
-            Contact
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/" href="#about">
-            About
-          </NavLink>
-        </li>
-      </ul>
+            <NavLink
+              to="/booking"
+              style={({ isActive, isPending }) => {
+                setActive(isActive)
+              }}
+            >
+              Booking
+            </NavLink>
+          </li>
+          <li className="mx-6">
+            <NavLink to="/" href="#service">
+              Services
+            </NavLink>
+          </li>
+          <li className="ml-3 mr-6">
+            <NavLink to="/" href="#contact">
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/" href="#about">
+              About
+            </NavLink>
+          </li>
+        </ul>
+      )}
+
       <div className="relative">
         {name ? (
           <div className="flex cursor-pointer" onClick={() => handleMenu()}>
@@ -110,7 +114,7 @@ export default function Navbar() {
           <div className="absolute w-60 top-7">
             <ul>
               <li className="py-2 px-4 bg-gray-100 cursor-pointer hover:bg-gray-800 hover:text-white">
-                {name}
+                <NavLink to="/profile">{name}</NavLink>
               </li>
               <li
                 onClick={() => handleLogout()}
