@@ -30,28 +30,28 @@ const Booking = () => {
     const password = 'f0116eeaa3734d42b29a939d7e420643' // Replace with your actual password
     const basicAuth = btoa(`${username}:${password}`)
 
-    try {
-      // Fetch the payment token from another endpoint (replace 'tokenEndpoint' with the actual URL)
-      const tokenResponse = await fetch(
-        'https://mtndeveloperapi.portal.mtn.co.rw/collection/token/',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key': '8eb5b9ecff0b47f1b318475d5d2a28be',
-            Authorization: `Basic ${basicAuth}`,
-          },
-          // Include any necessary data for token generation (e.g., user authentication)
-          body: JSON.stringify({
-            /* token generation data */
-          }),
-          mode: 'no-cors',
-        },
-      )
-      console.log(tokenResponse)
-    } catch (err) {
-      // Handle errors
-    }
+    // try {
+    //   // Fetch the payment token from another endpoint (replace 'tokenEndpoint' with the actual URL)
+    //   const tokenResponse = await fetch(
+    //     'https://mtndeveloperapi.portal.mtn.co.rw/collection/token/',
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Ocp-Apim-Subscription-Key': '8eb5b9ecff0b47f1b318475d5d2a28be',
+    //         Authorization: `Basic ${basicAuth}`,
+    //       },
+    //       // Include any necessary data for token generation (e.g., user authentication)
+    //       body: JSON.stringify({
+    //         /* token generation data */
+    //       }),
+    //       mode: 'no-cors',
+    //     },
+    //   )
+    //   console.log(tokenResponse)
+    // } catch (err) {
+    //   // Handle errors
+    // }
 
     fetch('http://localhost:3000/api/reservations', {
       method: 'POST',
