@@ -31,6 +31,8 @@ export default function Navbar() {
     try {
       // const token = localStorage.getItem('bet_token')
       const name = jwt_decode(token).name
+      console.log(name) 
+        console.log("Name : ", name )
       const firstNameInitial = name.split(' ')[0].charAt(0)
       const lastNameInitial = name.split(' ')[1].charAt(0)
       if (token === null) {
@@ -45,6 +47,8 @@ export default function Navbar() {
   const handleMenu = () => {
     setActiveMenu(!activeMenu)
   }
+
+  console.log("Name 1: ", name )
 
   const handleLogout = () => {
     dispatch(Logout())
