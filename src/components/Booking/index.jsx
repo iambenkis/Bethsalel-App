@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Booking = () => {
   const [ships, setShips] = useState([])
@@ -8,6 +9,7 @@ const Booking = () => {
   const departureDate = useRef()
   const arrivalDate = useRef()
   const roundTrip = useRef()
+  const navigate = useNavigate()
   useEffect(() => {
     fetch('http://localhost:3000/api/boat')
       .then((res) => res.json())
@@ -62,7 +64,10 @@ const Booking = () => {
       mode: 'cors',
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data)
+        navigate('/profile')
+      })
       .catch((err) => console.log(err))
     console.log(data)
   }

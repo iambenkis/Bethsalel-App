@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react'
 import Profile from '../Profile'
+import jwt_decode from 'jwt-decode'
 
 const Books = () => {
-  const name = 'Benjamin Kisenge'
+  const [name, setName] = useState('')
   const [books, setBooks] = useState([])
+  const token = localStorage.getItem('bet_token')
   useEffect(() => {
-    fetch(`http://localhost:3000/api/reservations/${name}`)
-      .then((res) => res.json())
+    const name = jwt_decode(token).name
+    console.log(name, "rsname")
+    fetch(`http://localhost:3000/api/reservation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name }), 
+      mode: 'cors'
+    })
+      .then((res) => {
+        // console.log(res.json(), "jjj")
+        return res.json()})
       .then((data) => setBooks(data.reservations))
       .catch((err) => console.log(err))
-  }, [])
+  }, [name])
 
-  books?.map((book) => console.log(book.boat))
+  books?.map((book) => console.log(book.boat, "nnnn"))
   return (
     <div className="my-20 mx-40 ">
       <Profile />
