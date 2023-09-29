@@ -10,6 +10,10 @@ const Booking = () => {
   const arrivalDate = useRef()
   const roundTrip = useRef()
   const navigate = useNavigate()
+  const [selectedStatus, setSelectedStatus] = useState('roundtrip')
+  const handleOptionChange = (event) => {
+    setSelectedStatus(event.target.value)
+  }
   useEffect(() => {
     fetch('http://localhost:3000/api/boat')
       .then((res) => res.json())
@@ -25,12 +29,12 @@ const Booking = () => {
       boatClass: shipClass.current.value,
       departureDate: departureDate.current.value,
       returnDate: arrivalDate.current.value,
-      isRoundtrip: roundTrip.current.value,
+      isRoundtrip: selectedStatus,
     }
 
-    const username = '58a75be0-35cf-4140-bdce-fabce66976e6' // Replace with your actual username
-    const password = 'f0116eeaa3734d42b29a939d7e420643' // Replace with your actual password
-    const basicAuth = btoa(`${username}:${password}`)
+    // const username = '58a75be0-35cf-4140-bdce-fabce66976e6' // Replace with your actual username
+    // const password = 'f0116eeaa3734d42b29a939d7e420643' // Replace with your actual password
+    // const basicAuth = btoa(`${username}:${password}`)
 
     // try {
     //   // Fetch the payment token from another endpoint (replace 'tokenEndpoint' with the actual URL)
@@ -91,8 +95,10 @@ const Booking = () => {
                   type="radio"
                   id="html"
                   name="fav_language"
-                  value="HTML"
+                  value="roundtrip"
                   ref={roundTrip}
+                  checked={selectedStatus === 'roundtrip'}
+                  onChange={handleOptionChange}
                 />
                  {' '}
                 <label for="html" className="text-black text-xs">
@@ -103,8 +109,9 @@ const Booking = () => {
                   type="radio"
                   id="css"
                   name="fav_language"
-                  value="CSS"
-                  ref={roundTrip}
+                  value="one way"
+                  checked={selectedStatus === 'one way'}
+                  onChange={handleOptionChange}
                 />
                  {' '}
                 <label for="css" className="text-black text-xs">
