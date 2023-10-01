@@ -1,3 +1,4 @@
+import { Radio } from "@material-tailwind/react";
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -77,46 +78,50 @@ const Booking = () => {
   }
   // console.log(ships)
   return (
-    <div className={`home bg-cover bg-no-repeat w-full mt-20 backdrop-blur-sm`}>
-      <div className=" w-full h-full bg-black/75">
-        <div className="text-white flex justify-between items-center px-20 ml-20 mr-20">
+    <div className={`home bg-cover bg-no-repeat w-full `}>
+      <div className=" w-full h-full bg-black/75 pt-20">
+        <div className="text-white flex flex-col-reverse md:flex-row justify-between items-center px-4 md:px-20">
           <form
             action=""
             id="myForm"
-            className="bg-neutral-300 w-[45%]  mt-10"
+            className="bg-neutral-300 shadow-xl w-[80%] md:w-[45%] mx-auto bg-white mt-10 p-6"
             onSubmit={(e) => handleRequestTicket(e)}
           >
             <h1 className="p-5 bg-white text-black text-xl">
               <span className="font-bold ">Book</span> your ticket
             </h1>
             <div className="p-5">
-              <div className="flex items-center">
-                <input
-                  type="radio"
+              <div className="flex items-center text-xs">
+                <Radio
+                  name="type"
                   id="html"
                   name="fav_language"
+                  label="Roundtrip"
                   value="roundtrip"
+                  defaultChecked              
                   ref={roundTrip}
                   checked={selectedStatus === 'roundtrip'}
                   onChange={handleOptionChange}
                 />
-                 {' '}
-                <label for="html" className="text-black text-xs">
-                  Roundtrip
-                </label>
+//                  {' '}
+//                 <label for="html" className="text-black text-xs">
+//                   Roundtrip
+//                 </label>
                  
-                <input
+                <Radio
                   type="radio"
                   id="css"
                   name="fav_language"
                   value="one way"
+                  name="type" 
+                  label="One way"
                   checked={selectedStatus === 'one way'}
                   onChange={handleOptionChange}
                 />
                  {' '}
-                <label for="css" className="text-black text-xs">
-                  One way
-                </label>
+//                 <label for="css" className="text-black text-xs">
+//                   One way
+//                 </label>
               </div>
               <input
                 type="text"
@@ -176,8 +181,8 @@ const Booking = () => {
             </div>
           </form>
           <div>
-            <h1 className="font-medium text-6xl">Book your ticket </h1>
-            <p className="italic text-6xl mt-2 font-thin">Easy online</p>
+            <h1 className="font-medium text-3xl md:text-6xl">Book your ticket </h1>
+            <p className="italic text-3xl md:text-6xl mt-2 font-thin">Easy online</p>
           </div>
         </div>
       </div>
