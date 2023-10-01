@@ -12,6 +12,8 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from '@clerk/clerk-react'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key')
@@ -20,11 +22,13 @@ if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <ThemeProvider>
+         <App />
+      </ThemeProvider>
+    </React.StrictMode>
+  </Provider>,
 )
 
 reportWebVitals()

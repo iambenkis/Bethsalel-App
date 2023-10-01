@@ -2,6 +2,20 @@ import React from 'react';
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { CiUser } from 'react-icons/ci'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { FaCaretDown } from 'react-icons/fa'
+import axios from 'axios'
+import jwt_decode from 'jwt-decode'
+import { Logout } from '../redux/login'
+// import Protected from '../protected'
+
+const axiosConfig = {
+  method: 'GET', // Specify the HTTP method (GET, POST, etc.)
+  url: 'http://localhost:3000/api/login', // Specify the API endpoint
+  mode: 'cors', // Set CORS mode to 'cors'
+}
 
 import {
   Navbar,
@@ -14,103 +28,119 @@ import {
 
 export default function NavbarDefault() {
   const [isActive, setActive] = useState(false)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.login)
+  const [name, setName] = useState('')
+  const [activeMenu, setActiveMenu] = useState(false)
+  const token = localStorage.getItem('bet_token')
 
-  const [openNav, setOpenNav] = React.useState(false);
+  axios.defaults.withCredentials = true
 
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
-  }, []);
+  useEffect(() => {
+    try {
+      // const token = localStorage.getItem('bet_token')
+      const name = jwt_decode(token).name
+      console.log(name)
+      console.log('Name : ', name)
+      const firstNameInitial = name.split(' ')[0].charAt(0)
+      const lastNameInitial = name.split(' ')[1].charAt(0)
+      if (token === null) {
+        navigate('/login')
+      }
+      setName(name)
+    } catch (error) {
+      // navigate('/login')
+    }
+  }, [state.isAuthenticated])
+  
+   const handleMenu = () => {
+    setActiveMenu(!activeMenu)
+  }
 
-  const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          About
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Services
-        </a>
-      </Typography>
-      <Button variant="gradient" size="sm" fullWidth className="mb-2">
-          <Link to="/booking">Book Now</Link>
-        </Button>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          <CiUser className="text-xl cursor-pointer" />
-        </a>
-      </Typography>
-    </ul>
-  );
+  console.log('Name 1: ', name)
 
+  const handleLogout = () => {
+    dispatch(Logout())
+    console.log('logout')
+    setName('')
+    navigate('/login')
+  }
+
+  console.log(state, 'nav')
+ /// From here 
+
+/// to here
+ 
   return (
-    <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-40 lg:py-4">
-      <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl uppercase"
-        >
-          <Link to="/">betsalel ships</Link>
-        </Typography>
-        <div className="flex items-center gap-4">
-          <div className="mr-4 hidden lg:block">{navList}</div>
-          <IconButton
-            variant="text"
-            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-            ripple={false}
-            onClick={() => setOpenNav(!openNav)}
+    <div
+      className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-40 py-5 pl-40"
+      style={{
+        zIndex: '100',
+      }}
+    >
+      <a href="/" className="font-bold text-4xl uppercase">
+        betsalel <span className="font-light ">ships</span>
+      </a>
+      {localStorage.getItem('bet_token') && (
+        <ul className="flex ml-[5%] mr-[10%]">
+          <li
+            className={`${
+              isActive ? 'bg-blue-400 text-white' : ''
+            } px-4 border rounded-md`}
           >
-            {openNav ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+            <NavLink
+              to="/booking"
+              style={({ isActive, isPending }) => {
+                setActive(isActive)
+              }}
+            >
+              Booking
+            </NavLink>
+          </li>
+          <li className="mx-6">
+            <NavLink to="/services">Services</NavLink>
+          </li>
+          <li className="ml-3 mr-6">
+            <NavLink to="/" href="#contact">
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/" href="#about">
+              About
+            </NavLink>
+          </li>
+        </ul>
+      )}
+
+      <div className="relative">
+        {name ? (
+          <div className="flex cursor-pointer" onClick={() => handleMenu()}>
+            <p className="text-sm mr-2">{name}</p>
+            <FaCaretDown className="text-xl " />
+          </div>
+        ) : (
+          <CiUser
+            className="text-xl cursor-pointer"
+            onClick={() => navigate('/signup')}
+          />
+        )}
+        {activeMenu && name && (
+          <div className="absolute w-60 top-7">
+            <ul>
+              <li className="py-2 px-4 bg-gray-100 cursor-pointer hover:bg-gray-800 hover:text-white">
+                <NavLink to="/profile">{name}</NavLink>
+              </li>
+              <li
+                onClick={() => handleLogout()}
+                className="py-2 px-4 bg-gray-100 cursor-pointer hover:bg-gray-800 hover:text-white"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </IconButton>
-        </div>
+                Logout
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
       <MobileNav open={openNav}>
         {navList}

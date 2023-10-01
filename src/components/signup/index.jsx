@@ -1,29 +1,41 @@
 import Register from '../../assets/register.jpg'
 import React, { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
   const nameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const confirmRef = useRef()
+  const navigate = useNavigate()
 
   const handleSignup = (e) => {
+    console.log('hello')
+    const data = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      confirmPassword: confirmRef.current.value,
+    }
     e.preventDefault()
-    const response = fetch('http://localhost:3000/api/register', {
+    fetch('http://localhost:3000/api/register', {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name: nameRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        confirmPassword: confirmRef.current.value,
-      }),
+      body: JSON.stringify(data),
     })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'User registered successfully') {
+          navigate('/login')
+        }
+      })
+      .catch((error) => {
+        console.log('Error parsing JSON:', error)
+      })
 
-    console.log(response)
     e.target.reset()
   }
 
@@ -76,6 +88,12 @@ const Signup = () => {
               </button>
             </form>
           </div>
+          <p className="text-black absolute right-5 top-5 text-sm">
+            Already have an account ?{' '}
+            <a href="/login" className="text-blue-500">
+              Login
+            </a>
+          </p>
         </div>
       </div>
     </div>
