@@ -31,8 +31,8 @@ export default function Navbar() {
     try {
       // const token = localStorage.getItem('bet_token')
       const name = jwt_decode(token).name
-      console.log(name) 
-        console.log("Name : ", name )
+      console.log(name)
+      console.log('Name : ', name)
       const firstNameInitial = name.split(' ')[0].charAt(0)
       const lastNameInitial = name.split(' ')[1].charAt(0)
       if (token === null) {
@@ -48,7 +48,7 @@ export default function Navbar() {
     setActiveMenu(!activeMenu)
   }
 
-  console.log("Name 1: ", name )
+  console.log('Name 1: ', name)
 
   const handleLogout = () => {
     dispatch(Logout())
@@ -85,9 +85,7 @@ export default function Navbar() {
             </NavLink>
           </li>
           <li className="mx-6">
-            <NavLink to="/" href="#service">
-              Services
-            </NavLink>
+            <NavLink to="/services">Services</NavLink>
           </li>
           <li className="ml-3 mr-6">
             <NavLink to="/" href="#contact">
