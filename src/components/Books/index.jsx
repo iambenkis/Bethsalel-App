@@ -48,39 +48,37 @@ const Books = () => {
         </p>
       </div>
       <ul className=" m-5 mx-10 grid gap-2">
-        {books
-          ?.reduce((book, date, index, arr) => {})
-          .map((book) => (
-            <li key={book.id} className="bg-gray-200">
-              <a href="#" className="p-4 flex justify-between">
-                <div>
-                  <h3>Full name : {book.user.name}</h3>
-                  <h3>Ship name: {book.boat.name}</h3>
-                  <h3>Ship class: {}</h3>
-                </div>
-                <div>
-                  {book.isRoundtrip === 'roundtrip' ? (
-                    <div>
-                      <h3>Trip Status: Round trip</h3>
-                      <h3>Departure date : {book.departureDate}</h3>
-                      <h3>Return date: {book.returnDate}</h3>
-                    </div>
-                  ) : (
-                    <div>
-                      <h3>Trip Status: One way</h3>
-                      <h3>Departure date : {book.departureDate}</h3>
-                      <h3>Return date: {'-'}</h3>
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <h3>Price: 46$</h3>
-                  <h3>Payment status: Paid</h3>
-                  <h3>Payment method: MTN MoMo</h3>
-                </div>
-              </a>
-            </li>
-          ))}
+        {books.map((book) => (
+          <li key={book.id} className="bg-gray-200">
+            <a href="#" className="p-4 flex justify-between">
+              <div>
+                <h3>Full name : {book.user.name}</h3>
+                <h3>Ship name: {book.boat.name}</h3>
+                <h3>Ship class: {}</h3>
+              </div>
+              <div>
+                {book.isRoundtrip === 'roundtrip' ? (
+                  <div>
+                    <h3>Trip Status: Round trip</h3>
+                    <h3>Departure date : {book.departureDate}</h3>
+                    <h3>Return date: {book.returnDate}</h3>
+                  </div>
+                ) : (
+                  <div>
+                    <h3>Trip Status: One way</h3>
+                    <h3>Departure date : {book.departureDate}</h3>
+                    <h3>Return date: {'-'}</h3>
+                  </div>
+                )}
+              </div>
+              <div>
+                <h3>Price: 46$</h3>
+                <h3>Payment status: Paid</h3>
+                <h3>Payment method: MTN MoMo</h3>
+              </div>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   )
