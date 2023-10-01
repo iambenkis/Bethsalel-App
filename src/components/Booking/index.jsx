@@ -1,4 +1,4 @@
-import { Radio } from "@material-tailwind/react";
+import { Radio } from '@material-tailwind/react'
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -95,33 +95,23 @@ const Booking = () => {
                 <Radio
                   name="type"
                   id="html"
-                  name="fav_language"
                   label="Roundtrip"
                   value="roundtrip"
-                  defaultChecked              
+                  defaultChecked
                   ref={roundTrip}
                   checked={selectedStatus === 'roundtrip'}
                   onChange={handleOptionChange}
                 />
-//                  {' '}
-//                 <label for="html" className="text-black text-xs">
-//                   Roundtrip
-//                 </label>
                  
                 <Radio
                   type="radio"
                   id="css"
-                  name="fav_language"
                   value="one way"
-                  name="type" 
+                  name="type"
                   label="One way"
                   checked={selectedStatus === 'one way'}
                   onChange={handleOptionChange}
                 />
-                 {' '}
-//                 <label for="css" className="text-black text-xs">
-//                   One way
-//                 </label>
               </div>
               <input
                 type="text"
@@ -181,8 +171,12 @@ const Booking = () => {
             </div>
           </form>
           <div>
-            <h1 className="font-medium text-3xl md:text-6xl">Book your ticket </h1>
-            <p className="italic text-3xl md:text-6xl mt-2 font-thin">Easy online</p>
+            <h1 className="font-medium text-3xl md:text-6xl">
+              Book your ticket{' '}
+            </h1>
+            <p className="italic text-3xl md:text-6xl mt-2 font-thin">
+              Easy online
+            </p>
           </div>
         </div>
       </div>

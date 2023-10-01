@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { CiUser } from 'react-icons/ci'
@@ -10,13 +10,6 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Logout } from '../redux/login'
 // import Protected from '../protected'
-
-const axiosConfig = {
-  method: 'GET', // Specify the HTTP method (GET, POST, etc.)
-  url: 'http://localhost:3000/api/login', // Specify the API endpoint
-  mode: 'cors', // Set CORS mode to 'cors'
-}
-
 import {
   Navbar,
   MobileNav,
@@ -24,7 +17,13 @@ import {
   Button,
   IconButton,
   Card,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react'
+
+const axiosConfig = {
+  method: 'GET', // Specify the HTTP method (GET, POST, etc.)
+  url: 'http://localhost:3000/api/login', // Specify the API endpoint
+  mode: 'cors', // Set CORS mode to 'cors'
+}
 
 export default function NavbarDefault() {
   const [isActive, setActive] = useState(false)
@@ -53,8 +52,8 @@ export default function NavbarDefault() {
       // navigate('/login')
     }
   }, [state.isAuthenticated])
-  
-   const handleMenu = () => {
+
+  const handleMenu = () => {
     setActiveMenu(!activeMenu)
   }
 
@@ -68,10 +67,10 @@ export default function NavbarDefault() {
   }
 
   console.log(state, 'nav')
- /// From here 
+  /// From here
 
-/// to here
- 
+  /// to here
+
   return (
     <div
       className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-40 py-5 pl-40"
@@ -142,10 +141,10 @@ export default function NavbarDefault() {
           </div>
         )}
       </div>
-      <MobileNav open={openNav}>
+      {/* <MobileNav open={openNav}>
         {navList}
-      </MobileNav>
-    </Navbar>
+      </MobileNav> */}
+    </div>
 
     //   className="fixed z-100 left-0 top-0 flex w-full bg-white justify-between items-center px-40 py-5 pl-40"
     //   style={{
