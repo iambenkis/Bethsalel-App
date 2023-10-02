@@ -37,7 +37,7 @@ const Books = () => {
   // console.log(books.createdAt, 'books')
   return (
     <div className="my-20 mx-40 ">
-      <Profile />
+      <Profile data={books} />
       <div className="pt-10 mb-5">
         <h1 className="text-xl capitalize font-medium">Recent reservatons</h1>
         <p className="text-sm text-gray-400">

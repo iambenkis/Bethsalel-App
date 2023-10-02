@@ -15,7 +15,7 @@ export default function Header() {
           <div className="flex items-center">
             <NavLink
               to="/booking"
-              className={`px-8 py-2 bg-blue-500 font-bold rounded-xl w-[35%] md:w-[14%] hover:bg-blue-500/75`}
+              className={`px-6 py-2 bg-blue-500 font-bold rounded-xl w-[35%] md:w-[14%] hover:bg-blue-500/75`}
             >
               Book Now
             </NavLink>
