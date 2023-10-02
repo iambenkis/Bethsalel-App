@@ -1,6 +1,8 @@
 import { Radio } from '@material-tailwind/react'
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Booking = () => {
   const [ships, setShips] = useState([])
@@ -11,6 +13,9 @@ const Booking = () => {
   const arrivalDate = useRef()
   const roundTrip = useRef()
   const navigate = useNavigate()
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate_r, setSelectedDate_r] = useState(null);
+  const startDate = new Date("2023-10-01"); 
   const [selectedStatus, setSelectedStatus] = useState('roundtrip')
   const handleOptionChange = (event) => {
     setSelectedStatus(event.target.value)
@@ -22,14 +27,28 @@ const Booking = () => {
       .catch((err) => console.log(err))
   }, [])
 
+  const [books, setBooks] = useState([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('http://localhost:3000/api/reservations')
+      const data = await response.json()
+      setBooks(data.response)
+      setLoading(false)
+    }
+    fetchUsers()
+  }, [])
+
+  console.log(books.length, "books")
+
   const handleRequestTicket = async (e) => {
     e.preventDefault()
     const data = {
       userId: user.current.value,
       boatId: ship.current.value,
       boatClass: shipClass.current.value,
-      departureDate: departureDate.current.value,
-      returnDate: arrivalDate.current.value,
+      departureDate: selectedDate,
+      returnDate: selectedDate_r,
       isRoundtrip: selectedStatus,
     }
 
@@ -90,7 +109,7 @@ const Booking = () => {
             <h1 className="p-5 bg-white text-black text-xl">
               <span className="font-bold ">Book</span> your ticket
             </h1>
-            <div className="p-5">
+            <div className=" px-2 py-5">
               <div className="flex items-center text-xs">
                 <Radio
                   name="type"
@@ -110,7 +129,20 @@ const Booking = () => {
                   name="type"
                   label="One way"
                   checked={selectedStatus === 'one way'}
-                  onChange={handleOptionChange}
+                  onChange={handleOptionChange} 
+                />
+                <p className='font-medium pl-[1px] text-xl text-black'>|</p>
+                <Radio
+                  type="radio"
+                  id="css" 
+                  name='d'
+                  label="Day 8AM" 
+                />
+                <Radio
+                  type="radio"
+                  id="css" 
+                  name='d'
+                  label="Night 5PM" 
                 />
               </div>
               <input
@@ -146,19 +178,23 @@ const Booking = () => {
                 </select>
               </div>
               <div className="flex justify-between text-gray-400 ">
-                <input
-                  type="date"
-                  id="birthday"
+                <DatePicker  
                   className="mr-2 w-full my-2 p-2 text-xs rounded-md bg-white border border-gray-400 focus:outline-none text-gray-400 focus:text-gray-600 focus:border-gray-500"
-                  name="birthday"
                   ref={departureDate}
+                  selected={selectedDate}
+                  onChange={date => setSelectedDate(date)}
+                  dateFormat='dd/MM/yyy'
+                  minDate={new Date()}
+                  placeholderText="You want to go on ?"
                 />
-                <input
-                  type="date"
-                  className="w-full my-2 p-2 text-xs rounded-md bg-white border border-gray-400 focus:outline-none text-gray-400 focus:text-gray-600 focus:border-gray-500"
-                  id="birthday"
-                  name="birthday"
+                <DatePicker
+                  className="w-full my-2 p-2 text-xs rounded-md bg-white border border-gray-400 focus:outline-none text-black focus:text-gray-600 focus:border-gray-500"
+                  selected={selectedDate_r}
+                  onChange={date => setSelectedDate_r(date)}
+                  dateFormat='dd/MM/yyy'
                   ref={arrivalDate}
+                  minDate={selectedDate}
+                  placeholderText="You'll return on ?"
                 />
               </div>
 

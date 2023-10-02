@@ -30,10 +30,7 @@ const Books = () => {
 
   useEffect(() => {}, [books])
 
-  const date1 = new Date('December 15, 2022')
-  const today = new Date('December 16, 2022')
-
-  books?.map((book) => console.log(new Date(book.createdAt), 'nnnn'))
+  books?.map((book) => console.log(book.departureDate, 'nnnn'))
   // console.log(books.createdAt, 'books')
   return (
     <div className="my-20 mx-40 ">
@@ -41,20 +38,20 @@ const Books = () => {
       <div className="pt-10 mb-5">
         <h1 className="text-xl capitalize font-medium">Recent reservatons</h1>
         <p className="text-sm text-gray-400">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat
-          minima rerum ad officia amet. Ea qui, nihil deleniti ad asperiores cum
-          velit, ex amet odit, non facere saepe! Illum consequatur veritatis
-          eveniet architecto ex repellat magnam temporibus quod quia ratione?
+          Here you are going to find your recent books history. 
         </p>
       </div>
       <ul className=" m-5 mx-10 grid gap-2">
         {books.map((book) => (
-          <li key={book.id} className="bg-gray-200">
+          <li key={book.id} className={`${
+            new Date(book.departureDate) < new Date() ? 'bg-gray-700 ': 'bg-gray-200'
+            // console.log(new Date(book.departureDate), "date")
+          }`}>
             <a href="#" className="p-4 flex justify-between">
               <div>
                 <h3>Full name : {book.user.name}</h3>
                 <h3>Ship name: {book.boat.name}</h3>
-                <h3>Ship class: {}</h3>
+                <h3>Ship class: {book.boatClass}</h3>
               </div>
               <div>
                 {book.isRoundtrip === 'roundtrip' ? (
@@ -72,7 +69,10 @@ const Books = () => {
                 )}
               </div>
               <div>
-                <h3>Price: 46$</h3>
+                <h3>Price: {
+                  book.boat.name === 'Emmanuel 1' ? '25' : book.boat.name ===  'Emmanuel 2' ? '15' : '30'
+                  }
+                </h3>
                 <h3>Payment status: Paid</h3>
                 <h3>Payment method: MTN MoMo</h3>
               </div>
